@@ -1,5 +1,6 @@
 # OSC_OBSController
  VRChatのExpressionメニューからOSCでOBSを制御する
+ 
  たまに通信に失敗してエラーがでます
 ## 使い方
 ###### OBSの設定
@@ -19,7 +20,8 @@
 ![image](https://user-images.githubusercontent.com/74849003/219845556-289bc322-6258-49aa-9814-dbf547067c0a.png)
 
 4. OBSのオーディオデバイス名をconfig.jsonの"devices"に入力
-   (設定しなくても動きますが音量メニューのコントロールが使えません)
+
+(設定しなくても動きますが音量メニューのコントロールが使えません)
 
 ![image](https://user-images.githubusercontent.com/74849003/219845871-f4b9036f-6180-4f40-8c8e-8a774af9393d.png)
 
