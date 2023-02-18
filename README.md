@@ -1,5 +1,6 @@
 # OSC_OBSController
  VRChatのExpressionメニューからOSCでOBSを制御する
+ たまに通信に失敗してエラーがでます
 ## 使い方
 ###### OBSの設定
 1. OBSを開いて [ツール → Websocketの設定] に移動する
