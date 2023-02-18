@@ -1,5 +1,5 @@
 # OSC_OBSController
- Control OBS from VRChat's Expression menu using OSC
+ VRChatのExpressionメニューからOSCでOBSを制御する
 ## 使い方
 ###### OBSの設定
 1. OBSを開いて [ツール → Websocketの設定] に移動する
