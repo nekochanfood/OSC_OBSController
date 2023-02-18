@@ -4,7 +4,7 @@
         "OBS":{
             "host": "127.0.0.1",
             "port": 42069,
-            "password": "nekochanfood"
+            "password": "password"
         },
         "Client":{
             "IP": "127.0.0.1",

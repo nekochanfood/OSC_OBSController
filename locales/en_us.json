@@ -1,9 +1,9 @@
 {
     "messages":{
-        "success": "Serving on %s",
-        "synced": "Synced parameters: %s (%s)",
-        "sync_complete" : "sync completed",
-        "setup": "Dispatching %s",
+        "success": "Serving on %s .",
+        "synced": "Synced parameters: %s (%s) .",
+        "sync_complete" : "Sync completed.",
+        "setup": "Dispatching %s .",
         "mute_str":{
             "unmuted":  "%s is unmuted.",
             "muted":    "%s is muted."

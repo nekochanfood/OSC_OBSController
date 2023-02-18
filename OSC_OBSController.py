@@ -239,7 +239,7 @@ def sync_values(unused_addr, b):
             if device == 0 or device == "":
                 i+=1
                 continue
-            sync_parameter(bool(cl.get_input_mute(devices[i])),parameters[1][i])
+            sync_parameter(cl.get_input_mute(devices[i]).input_muted,parameters[1][i])
             i+=1
 
         sync_parameter(cl.get_record_status().output_active,parameters[2][1])
