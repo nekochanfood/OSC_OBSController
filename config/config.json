@@ -1,0 +1,50 @@
+{
+    "locales": "locales/en_us.json",
+    "connection":{
+        "OBS":{
+            "host": "127.0.0.1",
+            "port": 42069,
+            "password": "nekochanfood"
+        },
+        "Client":{
+            "IP": "127.0.0.1",
+            "Port": 9000
+        },
+        "Server":{
+            "IP": "127.0.0.1",
+            "Port": 9001
+        }
+    },
+    "sync_delay": 0.05,
+    "objects":{
+        "devices":[
+            ""
+        ],
+        "scenes":[
+            ""
+        ]
+    },
+    "parameters":{
+        "$comment": "If you trying copypasting below strings in to VRCExpressionParameter Object, you should be delete /avatar/parameters/.",
+        "volumes":[
+            "/avatar/parameters/device0_volume",
+            "/avatar/parameters/device1_volume"
+        ],
+        "mutes":[
+            "/avatar/parameters/device0_mute",
+            "/avatar/parameters/device1_mute"
+        ],
+        "controls":[
+            "/avatar/parameters/sync_values",
+            "/avatar/parameters/StartStopRecord",
+            "/avatar/parameters/PauseResumeRecord",
+            "/avatar/parameters/StartStopReplay",
+            "/avatar/parameters/SaveReplay",
+            "/avatar/parameters/StartStopStreaming",
+            "/avatar/parameters/OpenLatestVideo",
+            "/avatar/parameters/OpenVideoFolder",
+            "/avatar/parameters/StopServer",
+            "/avatar/parameters/Reload"
+        ]
+    }
+}

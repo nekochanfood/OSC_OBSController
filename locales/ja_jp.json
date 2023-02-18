@@ -1,0 +1,37 @@
+{
+    "messages":{
+        "success": "%s で開始しました。",
+        "synced": "パラメーターの同期中: %s (%s)",
+        "sync_complete" : "同期が完了しました",
+        "setup": "設定中 %s",
+        "mute_str":{
+            "unmuted":  "%s はミュートされていません",
+            "muted":    "%s はミュートされています"
+        },
+        "volume_str":{
+            "set":  "%sの音量を %2.2fdB に変更"
+        },
+        "scene_str":{
+            "set":  "シーンを%sに変更"
+        },
+        "record_str":[
+            "録画の終了",
+            "録画の開始",
+            "録画の再開",
+            "録画の一時停止"
+        ],
+        "replay_str":[
+            "リプレイバッファの停止",
+            "リプレイバッファの開始",
+            "リプレイバッファの保存"
+        ],
+        "error":{
+            "type":["エラー","情報","注意"],
+            "strings":{
+                "InvalidName": "config.jsonに追加されていないデバイスを変更しようとしました",
+                "InvalidScene": "config.jsonに追加されていないシーンに変更しようとしました",
+                "ConnectionError": "OBSに接続できませんでした。OBSが起動されていないか、Websocketが無効です。\nconfig.jsonの値はOBSのWebsocketに設定されている値と同じですか？"
+            }
+        }
+    }
+}

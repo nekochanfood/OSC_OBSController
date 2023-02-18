@@ -1,0 +1,37 @@
+{
+    "messages":{
+        "success": "Serving on %s",
+        "synced": "Synced parameters: %s (%s)",
+        "sync_complete" : "sync completed",
+        "setup": "Dispatching %s",
+        "mute_str":{
+            "unmuted":  "%s is unmuted.",
+            "muted":    "%s is muted."
+        },
+        "volume_str":{
+            "set":  "%s's volume set to %2.2fdB."
+        },
+        "scene_str":{
+            "set":  "current scene set to %s."
+        },
+        "record_str":[
+            "Recording stopped.",
+            "Recording started.",
+            "Recording resumed.",
+            "Recording paused."
+        ],
+        "replay_str":[
+            "Replay Buffer stopped.",
+            "Replay Buffer started.",
+            "Replay Buffer saved."
+        ],
+        "error":{
+            "type":["Error","Info","Warning"],
+            "strings":{
+                "InvalidName": "You tried to change a device that is not registered in config.json.",
+                "InvalidScene": "You tried to change a scene that is not registered in config.json.",
+                "ConnectionError": "Couldn't connect to OBS. OBS is not launched or Websocket is disabled.\nIs config.json value the same as the value set for Websocket in OBS?"
+            }
+        }
+    }
+}
