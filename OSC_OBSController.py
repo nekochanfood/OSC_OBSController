@@ -7,7 +7,6 @@ import subprocess
 from pythonosc.dispatcher import Dispatcher
 from pythonosc import osc_server
 import obsws_python as obs
-import obsws_python.util as testa
 from pythonosc import udp_client
 from pythonosc.osc_message_builder import OscMessageBuilder
 
@@ -15,8 +14,8 @@ from pythonosc.osc_message_builder import OscMessageBuilder
 syncing = False
 startuping = False
 obsConfig = 0
-Server = 0 #config
-server = 0 #osc
+oscConfig = 0
+oscServer = 0
 ErrorType = 0
 ErrorMessages = 0
 parameters = 0
@@ -38,10 +37,10 @@ cl = 0
 LatestVideosPath = ""
 
 def startup(v):
-    global syncing,client,cl,Server,ErrorType,ErrorMessages,parameters
+    global syncing,client,cl,oscConfig,ErrorType,ErrorMessages,parameters
     global devices,scenes,sync_delay,scene_str,volume_str,success
     global setup,synced,synced,sync_complete,mute_str,record_str
-    global replay_str,server
+    global replay_str,oscServer
 
     if v == 1:
         syncing = True
@@ -62,7 +61,7 @@ def startup(v):
         setting_json['connection']["Client"]['Port']
     ]
 
-    Server = [
+    oscConfig = [
         setting_json['connection']["Server"]['IP'],
         setting_json['connection']["Server"]['Port']
     ]
@@ -79,9 +78,10 @@ def startup(v):
         setting_json['parameters']['mutes'],
         setting_json['parameters']['controls']
     ]
-    devices = setting_json['objects']['devices']
-    scenes = setting_json['objects']['scenes']
+    devices = []
+    scenes = []
     sync_delay = setting_json['sync_delay']
+
 
     scene_str  = locales_json['messages']['scene_str']['set']
     volume_str = locales_json['messages']['volume_str']['set']
@@ -101,15 +101,44 @@ def startup(v):
     client = udp_client.UDPClient(Client[0], Client[1])
     try:
         cl = obs.ReqClient(host=obsConfig[0], port=obsConfig[1], password=obsConfig[2])
+
     except ConnectionRefusedError:
         print(ErrorMessages[2])
         sys.exit()
 
+    array_scene = cl.get_scene_list().scenes
+    scene_item_list = []
+    scene_name = []
+
+    for _scenes in array_scene:
+        scene_name.append(_scenes['sceneName'])
+        print("Scene found: %s" % (_scenes['sceneName']))
+        scene_item_list.append(cl.get_scene_item_list(_scenes['sceneName']).scene_items)
+        scenes.append([0]*len(scene_item_list[array_scene.index(_scenes)]))
+
+    l = cl.get_input_list().inputs
+
+    for x in reversed(l):
+        if x['inputKind'] == "wasapi_output_capture" or x['inputKind'] == "wasapi_input_capture":
+            devices.append(x['inputName'])
+            print("Device found: %s" % (x['inputName']))
+        else:
+            for q in scene_item_list:
+                for scene in q:
+                    if x['inputName'] == scene['sourceName']:
+                        scenes[scene_item_list.index(q)][scene['sceneItemIndex']] = x['inputName']
+                        print("Item found: %s" % (scenes[scene_item_list.index(q)][scene['sceneItemIndex']]))
     
+    for scene in scenes:
+        scene.reverse()
+    
+    scene_name.reverse()
+    scenes.reverse()
+
     if v == 1:
         syncing = False
         sync_parameter(False,"/avatar/parameters/syncing")
-        server.server_address = (Server[0], Server[1])
+        oscServer.server_address = (oscConfig[0], oscConfig[1])
 
 def set_current_scene(unused_addr, i):
     if syncing: return
@@ -199,7 +228,7 @@ def OpenVideoFolder(unused_addr, b):
 
 def StopServer(unused_addr, b):
     if b:
-        server.shutdown()
+        oscServer.shutdown()
         sys.exit()
 
 def Reload(unused_addr, b):
@@ -246,6 +275,7 @@ def sync_values(unused_addr, b):
         sync_parameter(cl.get_record_status().output_paused,parameters[2][2])
         sync_parameter(cl.get_replay_buffer_status().output_active,parameters[2][3])
         sync_parameter(cl.get_stream_status().output_active,parameters[2][5])
+        
 
         syncing = False
         sync_parameter(False,"/avatar/parameters/syncing")
@@ -301,6 +331,6 @@ print(setup % (parameters[2][9]))
 
 sync_values("", True)
 
-server = osc_server.ThreadingOSCUDPServer((Server[0], Server[1]), dispatcher)
-print(success % (str(server.server_address)))
-server.serve_forever()
+oscServer = osc_server.ThreadingOSCUDPServer((oscConfig[0], oscConfig[1]), dispatcher)
+print(success % (str(oscServer.server_address)))
+oscServer.serve_forever()
