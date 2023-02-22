@@ -31,13 +31,13 @@ sync_complete = 0
 mute_str = 0
 record_str = 0
 replay_str = 0
-client = 0
+oscClient = 0
 cl = 0
 
 LatestVideosPath = ""
 
 def startup(v):
-    global syncing,client,cl,oscConfig,ErrorType,ErrorMessages,parameters
+    global syncing,oscClient,cl,oscConfig,ErrorType,ErrorMessages,parameters
     global devices,scenes,sync_delay,scene_str,volume_str,success
     global setup,synced,synced,sync_complete,mute_str,record_str
     global replay_str,oscServer
@@ -56,7 +56,7 @@ def startup(v):
         setting_json['connection']["OBS"]['password'],
     ]
 
-    Client = [
+    udpClient = [
         setting_json['connection']["Client"]['IP'],
         setting_json['connection']["Client"]['Port']
     ]
@@ -98,7 +98,7 @@ def startup(v):
     record_str = locales_json['messages']['record_str']
     replay_str = locales_json['messages']['replay_str']
 
-    client = udp_client.UDPClient(Client[0], Client[1])
+    oscClient = udp_client.UDPClient(udpClient[0], udpClient[1])
     try:
         cl = obs.ReqClient(host=obsConfig[0], port=obsConfig[1], password=obsConfig[2])
 
@@ -242,7 +242,7 @@ def sync_parameter(v,address):
         msg = OscMessageBuilder(address)
         msg.add_arg(v)
         m = msg.build()
-        client.send(m)
+        oscClient.send(m)
         print(synced % (address,str(v)))
 
 def sync_values(unused_addr, b):
