@@ -326,7 +326,7 @@ dispatcher.map(parameters[2][7], OpenVideoFolder)                       # boolea
 print(setup % (parameters[2][7]))
 dispatcher.map(parameters[2][8], StopServer)                            # boolean but used like a Trigger
 print(setup % (parameters[2][8]))
-dispatcher.map(parameters[2][9], Reload)                            # boolean but used like a Trigger
+dispatcher.map(parameters[2][9], Reload)                                # boolean but used like a Trigger
 print(setup % (parameters[2][9]))
 
 sync_values("", True)
