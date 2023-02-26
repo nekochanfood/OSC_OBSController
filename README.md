@@ -69,3 +69,9 @@
 | コンフィグ  | パラメータの更新とサーバーのシャットダウン  |
 
 ちなみにですがconfig.jsonの```locales```を```"locales/ja_jp.json"```にすると日本語になります。
+
+## トラブルシューティング
+
+Q. スタートアップも同期も終わっているのにEXmenuのボタンを押しても反応しない
+
+A. VRChatを閉じた状態で"%userprofile%\appdata\locallow\VRChat\VRChat\OSC\<あなたのVRChatのユーザーID>\Avatars"内にあるメニューを組み込んだアバターIDのjsonファイルを削除してみてください。
